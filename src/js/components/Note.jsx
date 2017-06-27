@@ -1,16 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { SHOW_NOTE_POPUP } from "../../reducers";
 
 
-export default class Note extends React.Component {
+class Note extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this._handleClick = this._handleClick.bind(this);
+    }
+
 
     render() {
-        let noteContent = this.props.noteContent;
-
         return(
-            <div className="note">
+            <div className="note" onClick={this._handleClick}>
                 <div className="note__content">
                     <h3>{this.props.header}</h3>
-                    <p>{noteContent.length > 110 ? noteContent.slice(0, 110) + "..." : noteContent}</p>
+                    <p>{this.props.noteContent}</p>
                 </div>
                 <div className="note__date">
                     <span>{this.props.date}</span>
@@ -19,12 +27,26 @@ export default class Note extends React.Component {
         );
     }
 
+
+    _handleClick() {
+        this.props.openNotePopup(this.props.id);
+    }
+
 }
 
 
 Note.propTypes = {
     header: React.PropTypes.string,
     noteContent: React.PropTypes.string,
-    date: React.PropTypes.string
+    date: React.PropTypes.string,
+    id: React.PropTypes.number
 };
+
+
+export default connect(
+    state => ({}),
+    dispatch => ({
+        openNotePopup: (id) => dispatch({ type: SHOW_NOTE_POPUP, data: id })
+    })
+)(Note);
 

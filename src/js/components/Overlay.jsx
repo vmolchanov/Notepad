@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { HIDDEN_POPUP } from "../../reducers";
+
 
 class Overlay extends React.Component {
 
@@ -19,17 +21,15 @@ class Overlay extends React.Component {
 
 
     _handleClick() {
-        this.props.closePopup();
+        this.props.closeAddNotePopup();
     }
 
 }
 
 
 export default connect(
-    state => ({
-        store: state
-    }),
+    state => ({}),
     dispatch => ({
-        closePopup: () => dispatch({ type: "HIDDEN_POPUP", data: false })
+        closeAddNotePopup: () => dispatch({ type: HIDDEN_POPUP })
     })
 )(Overlay);

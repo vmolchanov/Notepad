@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { HIDDEN_POPUP, ADD_NOTE } from "../../reducers"
 
 
 class AddNoteForm extends React.Component {
@@ -24,6 +25,10 @@ class AddNoteForm extends React.Component {
 
 
     render() {
+        let addBtnClasses = !this.state.textareaContent.length
+            ? "add-note-form__btn add-note-form__btn--disabled"
+            : "add-note-form__btn";
+
         return(
             <form className="add-note-form">
                 <div className="add-note-form__header-block">
@@ -48,8 +53,9 @@ class AddNoteForm extends React.Component {
                         Отмена
                     </button>
 
-                    <button className="add-note-form__btn"
-                            onClick={this._clickAddBtn}>
+                    <button className={addBtnClasses}
+                            onClick={this._clickAddBtn}
+                            disabled={!this.state.textareaContent.length}>
                         Добавить
                     </button>
                 </div>
@@ -123,8 +129,15 @@ class AddNoteForm extends React.Component {
         let noteContent = this.state.textareaContent;
         let noteDate = this._getCurrentDate();
 
-        this.props.addNote({ header: noteHeader, content: noteContent, date: noteDate });
-        this.props.closePopup();
+        if (!noteContent.length)
+            return;
+
+        this.props.addNote({
+            id: Date.now(),
+            header: noteHeader,
+            content: noteContent,
+            date: noteDate
+        });
 
         this.setState({
             inputContent: "",
@@ -149,11 +162,9 @@ AddNoteForm.propTypes = {
 
 
 export default connect(
-    state => ({
-        store: state
-    }),
+    state => ({}),
     dispatch => ({
-        closePopup: () => dispatch({ type: "HIDDEN_POPUP", data: false }),
-        addNote: (note) => dispatch({ type: "ADD_NOTE", data: note })
+        closePopup: () => dispatch({ type: HIDDEN_POPUP }),
+        addNote: (note) => dispatch({ type: ADD_NOTE, data: note })
     })
 )(AddNoteForm);

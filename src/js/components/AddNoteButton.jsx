@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { SHOW_ADD_NOTE_POPUP } from "../../reducers"
 
 
 class AddNoteButton extends React.Component {
@@ -37,10 +38,8 @@ class AddNoteButton extends React.Component {
 
 
 export default connect(
-    state => ({
-        store: state
-    }),
+    state => ({}),
     dispatch => ({
-        openPopup: () => dispatch({ type: "SHOW_POPUP", data: true })
+        openPopup: () => dispatch({ type: SHOW_ADD_NOTE_POPUP, data: true })
     })
 )(AddNoteButton);

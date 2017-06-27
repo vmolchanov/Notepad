@@ -28,7 +28,7 @@ class Header extends React.Component {
 
 export default connect(
     state => ({
-        store: state
+        notesCount: state.notesCount
     }),
     dispatch => ({})
 )(Header);

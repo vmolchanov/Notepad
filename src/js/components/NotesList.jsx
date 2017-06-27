@@ -10,7 +10,11 @@ export default class NotesList extends React.Component {
                 <div className="container">
                     {
                         this.props.notes.slice().reverse().map((note, index) => {
-                            return <Note header={note.header} noteContent={note.content} date={note.date} key={index} />;
+                            return <Note header={note.header}
+                                         noteContent={note.content}
+                                         date={note.date}
+                                         id={note.id}
+                                         key={index} />;
                         })
                     }
                 </div>

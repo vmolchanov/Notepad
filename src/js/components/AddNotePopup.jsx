@@ -5,19 +5,6 @@ import Overlay from "./Overlay.jsx";
 
 export default class AddNotePopup extends React.Component {
 
-    /**
-     * @constructor
-     * @param props
-     */
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isShow: this.props.isShow
-        };
-    }
-
-
     render() {
         let showClasses = "add-note-popup add-note-popup--show";
         let hiddenClasses = "add-note-popup";

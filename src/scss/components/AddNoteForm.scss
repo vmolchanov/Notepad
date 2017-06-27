@@ -37,28 +37,35 @@
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
-
-        & > button {
-            height: 40px;
-            width: 120px;
-
-            text-transform: uppercase;
-
-            outline: none;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            background-color: white;
-            box-shadow: 0 0 1px 0 black;
-        }
-
-        & > button:hover {
-            background-color: #FEF4D7;
-            cursor: pointer;
-        }
     }
 
+    &__btn {
+        height: 40px;
+        width: 120px;
+
+        text-transform: uppercase;
+
+        outline: none;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 0 0 1px 0 black;
+    }
+
+    &__btn:hover {
+        background-color: #FEF4D7;
+        cursor: pointer;
+    }
+
+    // Отступ между кнопками
     &__btn:first-child {
         margin-right: 15px;
+    }
+
+    &__btn--disabled:hover {
+        background-color: white;
+
+        cursor: auto;
     }
 
 }

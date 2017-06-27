@@ -1,0 +1,87 @@
+.note-popup {
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    overflow: scroll;
+
+    &__wrap {
+        position: relative;
+
+        width: 550px;
+        padding: 50px;
+        margin: 20px auto;
+
+        word-wrap: break-word;
+
+        background-color: white;
+
+        animation: zoomIn 0.35s;
+
+        z-index: 100;
+    }
+
+    &--show {
+        display: block;
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+
+        width: 40px;
+        height: 40px;
+
+        &::before {
+            position: absolute;
+            top: -3px;
+            left: 4px;
+
+            display: block;
+            width: 45px;
+            height: 15px;
+
+            transform-origin: 0 50%;
+            transform: rotate(45deg);
+            border-radius: 5px;
+
+            background: linear-gradient(to bottom, lightslategray, gray);
+
+            content: "";
+        }
+
+        &::after {
+            position: absolute;
+            top: -3px;
+            right: 4px;
+
+            display: block;
+            width: 45px;
+            height: 15px;
+
+            transform-origin: 100% 50%;
+            transform: rotate(-45deg);
+            border-radius: 5px;
+
+            background: linear-gradient(to bottom, lightslategray, gray);
+
+            content: "";
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:hover::before,
+        &:hover::after{
+            background: red;
+        }
+    }
+
+}

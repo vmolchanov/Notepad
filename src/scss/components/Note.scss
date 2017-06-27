@@ -8,6 +8,18 @@
 
     border-bottom: 2px solid #eee;
 
+    &__content {
+        h3,
+        p {
+            width: 850px;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            overflow: hidden;
+        }
+    }
+
     &__date {
         color: #aaa;
     }
