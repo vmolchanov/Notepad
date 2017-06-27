@@ -1,0 +1,50 @@
+.add-note-button {
+
+    position: relative;
+
+    width: 260px;
+    padding: 10px 15px;
+
+    text-align: right;
+
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: white;
+
+    &__name {
+        font-size: 22px;
+    }
+
+    &__plus {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+
+        width: 30px;
+        height: 30px;
+
+        text-align: center;
+        font-size: 28px;
+        line-height: 26px;
+        color: black;
+
+        border: 2px solid black;
+        border-radius: 50%;
+
+        background-color: white;
+        transform: translateY(-50%);
+    }
+
+    &:hover {
+        background-color: #FEF4D7;
+        cursor: pointer;
+
+        & .add-note-button__plus {
+            color: white;
+
+            background-color: #68CF6F;
+            border-color: #68CF6F;
+        }
+    }
+
+}
