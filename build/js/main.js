@@ -1865,7 +1865,8 @@ const DELETE_NOTE = "DELETE_NOTE";
                 state,
                 {
                     notes: [...copyNotes],
-                    choosenNote: -1
+                    choosenNote: -1,
+                    notesCount: state.notesCount - 1
                 }
             );
 
