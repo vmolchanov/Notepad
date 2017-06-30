@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { SHOW_ADD_NOTE_POPUP } from "../../reducers"
+
+import { SHOW_ADD_NOTE_POPUP } from "../../reducers";
 
 
 class AddNoteButton extends React.Component {
@@ -16,6 +17,10 @@ class AddNoteButton extends React.Component {
     }
 
 
+    /**
+     * Визуализация компонента
+     * @returns {string} html разметка
+     */
     render() {
         return (
             <div className="add-note-button" onClick={this._handleClick}>

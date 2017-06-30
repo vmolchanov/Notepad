@@ -1,0 +1,26 @@
+.note-controller {
+
+    & > div {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+
+        svg:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__edit:hover svg {
+        fill: #000;
+    }
+
+    &__delete:hover svg {
+        fill: #c00;
+    }
+
+    // расстояние между кнопками
+    & > div:not(:last-child) {
+        margin-right: 10px;
+    }
+
+}

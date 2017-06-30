@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { HIDDEN_POPUP } from "../../reducers";
-
 
 class Overlay extends React.Component {
 
+    /**
+     * @constructor
+     * @param props
+     */
     constructor(props) {
         super(props);
 
@@ -13,6 +15,10 @@ class Overlay extends React.Component {
     }
 
 
+    /**
+     * Визуализация компонента
+     * @returns {string} html разметка
+     */
     render() {
         return(
             <div className="overlay" onClick={this._handleClick}></div>
@@ -20,8 +26,12 @@ class Overlay extends React.Component {
     }
 
 
+    /**
+     * Обработчик клина на overlay
+     * @private
+     */
     _handleClick() {
-        this.props.closeAddNotePopup();
+        this.props.closePopup();
     }
 
 }
@@ -29,7 +39,5 @@ class Overlay extends React.Component {
 
 export default connect(
     state => ({}),
-    dispatch => ({
-        closeAddNotePopup: () => dispatch({ type: HIDDEN_POPUP })
-    })
+    dispatch => ({})
 )(Overlay);

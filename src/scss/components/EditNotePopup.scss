@@ -1,0 +1,31 @@
+.edit-note-popup {
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    overflow: scroll;
+
+    &__wrap {
+        position: relative;
+
+        width: 550px;
+        padding: 20px;
+        margin: 20px auto;
+
+        background-color: white;
+
+        z-index: 100;
+
+        animation: slideInDown 0.65s ease-out;
+    }
+
+    &--show {
+        display: block;
+    }
+
+}

@@ -3,6 +3,10 @@ import React from "react";
 
 export default class NotesCounter extends React.Component {
 
+    /**
+     * Визуализация компонента
+     * @returns {string} html разметка
+     */
     render() {
         return(
             <div className="notes-counter">

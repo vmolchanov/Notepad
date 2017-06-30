@@ -6,6 +6,7 @@ const devserver = require("./webpack/devserver");
 const extractCSS = require("./webpack/extractcss");
 const uglifyJs = require("./webpack/uglifyjs");
 const babel = require("./webpack/babel");
+const images = require("./webpack/images");
 
 const PATHS = {
     src: path.join(__dirname, "src"),
@@ -31,7 +32,8 @@ const common = merge([
         ]
     },
     extractCSS(),
-    babel()
+    babel(),
+    images()
 ]);
 
 

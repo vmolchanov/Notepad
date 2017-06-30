@@ -1,9 +1,14 @@
 import React from "react";
+
 import Note from "./Note.jsx";
 
 
 export default class NotesList extends React.Component {
 
+    /**
+     * Визуализация компонента
+     * @returns {string} html разметка
+     */
     render() {
         return(
             <div className="notes-list">

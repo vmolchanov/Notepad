@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import AddNoteForm from "./AddNoteForm.jsx";
 import Overlay from "./Overlay.jsx";
+import EditNoteForm from "./EditNoteForm.jsx";
 import { HIDDEN_POPUP } from "../../reducers";
 
 
-class AddNotePopup extends React.Component {
+class EditNotePopup extends React.Component {
 
     /**
      * @constructor
@@ -24,15 +24,20 @@ class AddNotePopup extends React.Component {
      * @returns {string} html разметка
      */
     render() {
-        const showClasses = "add-note-popup add-note-popup--show";
-        const hiddenClasses = "add-note-popup";
+        const showClasses = "edit-note-popup edit-note-popup--show";
+        const hiddenClasses = "edit-note-popup";
+
+        let header = this.props.choosenNote !== -1 ? this.props.note.header : "";
+        let content = this.props.choosenNote !== -1 ? this.props.note.content : "";
 
         return(
             <div className={this.props.isShow ? showClasses : hiddenClasses}>
                 <Overlay closePopup={this.closePopup} />
 
-                <div className="add-note-popup__wrap">
-                    <AddNoteForm closePopup={this.closePopup} />
+                <div className="edit-note-popup__wrap">
+                    <EditNoteForm inputContent={header}
+                                  textareaContent={content}
+                                  closePopup={this.closePopup}/>
                 </div>
             </div>
         );
@@ -49,14 +54,12 @@ class AddNotePopup extends React.Component {
 }
 
 
-AddNotePopup.defaultProps = {
-    isShow: false
-};
-
-
 export default connect(
-    state => ({}),
+    state => ({
+        note: state.notes.find((note) => note.id === state.choosenNote),
+        choosenNote: state.choosenNote
+    }),
     dispatch => ({
         closePopup: () => dispatch({ type: HIDDEN_POPUP })
     })
-)(AddNotePopup);
+)(EditNotePopup);

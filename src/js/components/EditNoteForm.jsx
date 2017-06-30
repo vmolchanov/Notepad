@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { ADD_NOTE } from "../../reducers";
+import { SAVE_NOTE } from "../../reducers";
 
 
-class AddNoteForm extends React.Component {
+class EditNoteForm extends React.Component {
 
     /**
      * @constructor
@@ -13,10 +13,15 @@ class AddNoteForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            inputContent: this.props.inputContent,
+            textareaContent: this.props.textareaContent
+        };
+
         this._changeInput = this._changeInput.bind(this);
         this._changeTextarea = this._changeTextarea.bind(this);
         this._clickCancelBtn = this._clickCancelBtn.bind(this);
-        this._clickAddBtn = this._clickAddBtn.bind(this);
+        this._clickSaveBtn = this._clickSaveBtn.bind(this);
     }
 
 
@@ -24,10 +29,9 @@ class AddNoteForm extends React.Component {
      * Установка значений для input и textarea(uncontrolled components)
      */
     componentDidUpdate() {
-        console.log("componentDidUpdate");
         this._headerInput.value = this.props.inputContent;
         this._textareaContent.value = this.props.textareaContent;
-        this._setAddButtonWork();
+        this._setSaveButtonWork();
     }
 
 
@@ -37,36 +41,36 @@ class AddNoteForm extends React.Component {
      */
     render() {
         return(
-            <form className="add-note-form" onSubmit={this._clickAddBtn}>
-                <div className="add-note-form__header-block">
-                    <label htmlFor="add-note-form__header">Заголовок</label>
-                    <input id="add-note-form__header"
-                           className="add-note-form__header-input"
+            <form className="edit-note-form" onSubmit={this._clickSaveBtn}>
+                <div className="edit-note-form__header-block">
+                    <label htmlFor="edit-note-form__header">Заголовок</label>
+                    <input id="edit-note-form__header"
+                           className="edit-note-form__header-input"
                            defaultValue={this.props.inputContent}
                            onChange={this._changeInput}
                            ref={input => this._headerInput = input} />
                 </div>
 
-                <div className="add-note-form__content-block">
-                    <label htmlFor="add-note-form__text">Текст</label>
-                    <textarea id="add-note-form__text"
-                              className="add-note-form__textarea"
+                <div className="edit-note-form__content-block">
+                    <label htmlFor="edit-note-form__text">Текст</label>
+                    <textarea id="edit-note-form__text"
+                              className="edit-note-form__textarea"
                               defaultValue={this.props.textareaContent}
                               onChange={this._changeTextarea}
                               ref={textarea => this._textareaContent = textarea}/>
                 </div>
 
-                <div className="add-note-form__buttons-block">
-                    <button className="add-note-form__btn"
+                <div className="edit-note-form__buttons-block">
+                    <button className="edit-note-form__btn"
                             onClick={this._clickCancelBtn}>
                         Отмена
                     </button>
 
-                    <button className="add-note-form__btn add-note-form__btn--disabled"
-                            onClick={this._clickAddBtn}
+                    <button className="edit-note-form__btn"
+                            onClick={this._clickSaveBtn}
                             disabled={!this.props.textareaContent}
-                            ref={button => this._addButton = button}>
-                        Добавить
+                            ref={button => this._saveButton = button}>
+                        Сохранить
                     </button>
                 </div>
             </form>
@@ -106,7 +110,7 @@ class AddNoteForm extends React.Component {
      */
     _changeTextarea(event) {
         this._textareaContent.value = event.target.value;
-        this._setAddButtonWork();
+        this._setSaveButtonWork();
     }
 
 
@@ -122,16 +126,16 @@ class AddNoteForm extends React.Component {
 
 
     /**
-     * Обработка события нажатия на кнопку <Добавить>
+     * Обработка события нажатия на кнопку <Сохранить>
      * @param event
      * @private
      */
-    _clickAddBtn(event) {
+    _clickSaveBtn(event) {
         event.preventDefault();
 
         let noteHeader = !this._headerInput.value.length ? "Без заголовка" : this._headerInput.value;
         let noteContent = this._textareaContent.value;
-        let noteDate = AddNoteForm.getCurrentDate();
+        let noteDate = EditNoteForm.getCurrentDate();
 
         if (!noteContent.length)
             return;
@@ -139,7 +143,7 @@ class AddNoteForm extends React.Component {
         this._headerInput.value = "";
         this._textareaContent.value = "";
 
-        this.props.addNote({
+        this.props.saveNote({
             id: Date.now(),
             header: noteHeader,
             content: noteContent,
@@ -149,31 +153,31 @@ class AddNoteForm extends React.Component {
 
 
     /**
-     * Устанавливает или удаляет значение disabled для кнопки <Добавить>
+     * Устанавливает или удаляет значение disabled для кнопки
      * @private
      */
-    _setAddButtonWork() {
-        this._addButton.disabled = !this._textareaContent.value.length;
-
+    _setSaveButtonWork() {
+        this._saveButton.disabled = !this._textareaContent.value.length;
         if (this._textareaContent.value.length) {
-            if (this._addButton.classList.contains("add-note-form__btn--disabled")) {
-                this._addButton.classList.remove("add-note-form__btn--disabled");
+            if (this._saveButton.classList.contains("edit-note-form__btn--disabled")) {
+                this._saveButton.classList.remove("edit-note-form__btn--disabled");
             }
         } else {
-            this._addButton.classList.add("add-note-form__btn--disabled");
+            this._saveButton.classList.add("edit-note-form__btn--disabled");
         }
     }
 
 }
 
 
-AddNoteForm.defaultProps = {
+EditNoteForm.defaultProps = {
     inputContent: "",
     textareaContent: ""
 };
 
 
-AddNoteForm.propTypes = {
+
+EditNoteForm.propTypes = {
     inputContent: React.PropTypes.string,
     textareaContent: React.PropTypes.string
 };
@@ -182,6 +186,6 @@ AddNoteForm.propTypes = {
 export default connect(
     state => ({}),
     dispatch => ({
-        addNote: (note) => dispatch({ type: ADD_NOTE, data: note })
+        saveNote: note => dispatch({ type: SAVE_NOTE, data: note })
     })
-)(AddNoteForm);
+)(EditNoteForm);
