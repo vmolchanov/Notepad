@@ -99,7 +99,7 @@ class EditNoteForm extends React.Component {
      * @private
      */
     _changeInput(event) {
-        this._headerInput.value = event.target.value;
+        event.preventDefault();
     }
 
 
@@ -109,7 +109,7 @@ class EditNoteForm extends React.Component {
      * @private
      */
     _changeTextarea(event) {
-        this._textareaContent.value = event.target.value;
+        event.preventDefault();
         this._setSaveButtonWork();
     }
 

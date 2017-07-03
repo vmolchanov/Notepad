@@ -10,6 +10,8 @@ import EditNotePopup from "./EditNotePopup.jsx";
 
 class App extends React.Component {
 
+    // TODO баг: при редактировнии форм курсор перемещается в конец
+
     /**
      * Визуализация компонента
      * @returns {string} html разметка

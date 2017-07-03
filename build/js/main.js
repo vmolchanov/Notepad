@@ -24964,6 +24964,8 @@ var App = function (_React$Component) {
         key: "render",
 
 
+        // TODO баг: при редактировнии форм курсор перемещается в конец
+
         /**
          * Визуализация компонента
          * @returns {string} html разметка
@@ -25790,25 +25792,12 @@ var AddNoteForm = function (_React$Component) {
     }
 
     /**
-     * Установка значений для input и textarea(uncontrolled components)
+     * Визуализация компонента
+     * @returns {string} html разметка
      */
 
 
     _createClass(AddNoteForm, [{
-        key: "componentDidUpdate",
-        value: function componentDidUpdate() {
-            console.log("componentDidUpdate");
-            this._headerInput.value = this.props.inputContent;
-            this._textareaContent.value = this.props.textareaContent;
-            this._setAddButtonWork();
-        }
-
-        /**
-         * Визуализация компонента
-         * @returns {string} html разметка
-         */
-
-    }, {
         key: "render",
         value: function render() {
             var _this2 = this;
@@ -25887,7 +25876,7 @@ var AddNoteForm = function (_React$Component) {
          * @private
          */
         value: function _changeInput(event) {
-            this._headerInput.value = event.target.value;
+            event.preventDefault();
         }
 
         /**
@@ -25899,7 +25888,7 @@ var AddNoteForm = function (_React$Component) {
     }, {
         key: "_changeTextarea",
         value: function _changeTextarea(event) {
-            this._textareaContent.value = event.target.value;
+            event.preventDefault();
             this._setAddButtonWork();
         }
 
@@ -26390,7 +26379,7 @@ var EditNoteForm = function (_React$Component) {
          * @private
          */
         value: function _changeInput(event) {
-            this._headerInput.value = event.target.value;
+            event.preventDefault();
         }
 
         /**
@@ -26402,7 +26391,7 @@ var EditNoteForm = function (_React$Component) {
     }, {
         key: "_changeTextarea",
         value: function _changeTextarea(event) {
-            this._textareaContent.value = event.target.value;
+            event.preventDefault();
             this._setSaveButtonWork();
         }
 

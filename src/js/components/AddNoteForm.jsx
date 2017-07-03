@@ -21,17 +21,6 @@ class AddNoteForm extends React.Component {
 
 
     /**
-     * Установка значений для input и textarea(uncontrolled components)
-     */
-    componentDidUpdate() {
-        console.log("componentDidUpdate");
-        this._headerInput.value = this.props.inputContent;
-        this._textareaContent.value = this.props.textareaContent;
-        this._setAddButtonWork();
-    }
-
-
-    /**
      * Визуализация компонента
      * @returns {string} html разметка
      */
@@ -95,7 +84,7 @@ class AddNoteForm extends React.Component {
      * @private
      */
     _changeInput(event) {
-        this._headerInput.value = event.target.value;
+        event.preventDefault();
     }
 
 
@@ -105,7 +94,7 @@ class AddNoteForm extends React.Component {
      * @private
      */
     _changeTextarea(event) {
-        this._textareaContent.value = event.target.value;
+        event.preventDefault();
         this._setAddButtonWork();
     }
 
